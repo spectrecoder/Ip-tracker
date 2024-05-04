@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 // Components
 import toast, { Toaster } from "react-hot-toast";
+import DetailInfoCard from "../components/DetailInfoCard";
 import Form from "../components/Form";
 import InfoCard from "../components/InfoCard";
 
@@ -12,6 +13,7 @@ export default function Home({ data }) {
     ssr: false,
   });
 
+  const [detail, setDetail] = useState(false)
   const [info, setInfo] = useState({
     ip: "n/a",
     city: "n/a",
@@ -60,16 +62,28 @@ export default function Home({ data }) {
           <h1 className="text-white text-[1.625rem] font-medium leading-none mt-6 md:text-[2rem] md:mt-8">
             Com IP Address Tracker
           </h1>
-          <div className="mt-7 md:mt-8">
+          <div className="mt-7 md:mt-8 flex">
             <Form />
+            <button className="px-10" onClick={() => setDetail(!detail)}>{detail == true ? "Main Info" : "Detail Info"}</button>
           </div>
+          
           <div className="mt-6 md:mt-12">
-            <InfoCard
-              ip={info.ip}
-              location={`${info.city}, ${info.region}`}
-              timezone={info.timezone}
-              isp={info.isp}
-            />
+            { !detail && (
+                <InfoCard
+                ip={info.ip}
+                location={`${info.city}, ${info.region}`}
+                timezone={info.timezone}
+                isp={info.isp}
+              />
+            )}
+            { detail && (
+                <DetailInfoCard
+                ip={info.ip}
+                location={`${info.city}, ${info.region}`}
+                timezone={info.timezone}
+                isp={info.isp}
+              />
+            )}
           </div>
         </div>
         <Map position={[info.lat, info.lng]} />
