@@ -14,6 +14,7 @@ export default function Home({ data }) {
   });
 
   const [detail, setDetail] = useState(false)
+  const [mapVisible, setMapVisible] = useState(false)
   const [info, setInfo] = useState({
     ip: "n/a",
     city: "n/a",
@@ -55,8 +56,9 @@ export default function Home({ data }) {
         <meta name="description" content="COM IP Address Tracker" />
         <link rel="icon" href="/favicon-32x32.png" />
       </Head>
-
       <main className="h-screen relative">
+      { mapVisible && (
+        <>
         <div className="h-[300px] bg-pattern bg-center-56 bg-no-repeat bg-cover md:h-[280px] md:bg-left" />
         <div className="flex flex-col items-center w-full absolute top-0 z-[999]">
           <h1 className="text-white text-[1.625rem] font-medium leading-none mt-6 md:text-[2rem] md:mt-8">
@@ -64,7 +66,11 @@ export default function Home({ data }) {
           </h1>
           <div className="mt-7 md:mt-8 flex">
             <Form />
-            <button className="px-10" onClick={() => setDetail(!detail)}>{detail == true ? "Main Info" : "Detail Info"}</button>
+            <button
+              className="mx-10 select-none rounded-lg bg-blue-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+              type="button"
+              onClick={() => setDetail(!detail)}>{detail == true ? "Main Info" : "Detail Info"}
+            </button>
           </div>
           
           <div className="mt-6 md:mt-12">
@@ -87,6 +93,38 @@ export default function Home({ data }) {
           </div>
         </div>
         <Map position={[info.lat, info.lng]} />
+        </>
+      )}
+
+      { !mapVisible && (
+        <div
+          style={{
+            backgroundImage: 'url("/images/map.jpg")',
+            height: "100vh",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            textAlign: 'center'
+            
+          }}
+          role="img"
+          aria-label="Map Image"
+        >
+          <h1 style={{
+            paddingTop: '190px',
+            fontSize: '60px',
+            fontStyle: 'italic',
+            fontWeight: '900',
+            color: 'deeppink',
+            paddingBottom: '250px',
+            fontFamily: 'none'
+          }}>WELCOME TO COM IP TRACKER!</h1>
+          <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+            onClick={() => setMapVisible(true)}>
+            IP TRACKER START!
+          </button>
+        </div>
+      
+      )}
       </main>
       <Toaster />
     </>
@@ -100,7 +138,7 @@ export async function getServerSideProps(context) {
   if (!queryIpAddress) {
     const resGetIpAddress = await fetch('https://api.ipify.org/?format=json');
     const data = await resGetIpAddress.json()
-
+    console.log("---------this is data----------", data)
     if (!data) {
       return {
         redirect: {

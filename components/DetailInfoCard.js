@@ -20,15 +20,6 @@ export default function DetailInfoCard({ ip, location, timezone, isp }) {
           <h2 className="info-heading">ISP</h2>
           <p className="info-text break-words">{isp}</p>
         </div>
-        <div className="info-item">
-          <h2 className="info-heading">TIMEZONE</h2>
-          <p className="info-text break-all">{timezone}</p>
-        </div>
-        <span className="line" />
-        <div className="info-item">
-          <h2 className="info-heading">ISP</h2>
-          <p className="info-text break-words">{isp}</p>
-        </div>
       </div>
     );
   }
