@@ -1,12 +1,12 @@
 import dynamic from "next/dynamic";
 import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
-
 // Components
 import toast, { Toaster } from "react-hot-toast";
 import DetailInfoCard from "../components/DetailInfoCard";
 import Form from "../components/Form";
-import InfoCard from "../components/InfoCard";
 
 export default function Home({ data }) {
   const Map = dynamic(() => import("../components/Map"), {
@@ -56,12 +56,29 @@ export default function Home({ data }) {
         <meta name="description" content="COM IP Address Tracker" />
         <link rel="icon" href="/favicon-32x32.png" />
       </Head>
+      <nav className="flex fixed w-full top-0 md:px-24 px-4 z-10 backdrop-blur-3xl  border-green-100 py-2 items-center justify-between">
+        <Link href="/">
+          <Image
+            src="/logo.gif"
+            alt="logo"
+            className="object-cover w-14 h-14"
+            width={500}
+            height={500}
+          />
+        </Link>
+        {/* <h1 style={{
+            fontSize: '60px',
+            fontStyle: 'italic',
+            fontWeight: '900',
+            color: 'deeppink',
+            fontFamily: 'none'
+          }}>WELCOME TO COM IP TRACKER!</h1> */}
+      </nav>
       <main className="h-screen relative">
-      { mapVisible && (
         <>
-        <div className="h-[300px] bg-pattern bg-center-56 bg-no-repeat bg-cover md:h-[280px] md:bg-left" />
+        <div className="h-[300px] bg-pattern bg-gray-900 bg-no-repeat bg-cover md:h-[180px] md:bg-left" />
         <div className="flex flex-col items-center w-full absolute top-0 z-[999]">
-          <h1 className="text-white text-[1.625rem] font-medium leading-none mt-6 md:text-[2rem] md:mt-8">
+          <h1 className="text-white text-[1.625rem] font-medium leading-none mt-6 md:text-[2rem] md:mt-8" style={{ marginLeft: "-200px"}}>
             Com IP Address Tracker
           </h1>
           <div className="mt-7 md:mt-8 flex">
@@ -75,12 +92,7 @@ export default function Home({ data }) {
           
           <div className="mt-6 md:mt-12">
             { !detail && (
-                <InfoCard
-                ip={info.ip}
-                location={`${info.city}, ${info.region}`}
-                timezone={info.timezone}
-                isp={info.isp}
-              />
+                <></>
             )}
             { detail && (
                 <DetailInfoCard
@@ -94,37 +106,6 @@ export default function Home({ data }) {
         </div>
         <Map position={[info.lat, info.lng]} />
         </>
-      )}
-
-      { !mapVisible && (
-        <div
-          style={{
-            backgroundImage: 'url("/images/map.jpg")',
-            height: "100vh",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            textAlign: 'center'
-            
-          }}
-          role="img"
-          aria-label="Map Image"
-        >
-          <h1 style={{
-            paddingTop: '190px',
-            fontSize: '60px',
-            fontStyle: 'italic',
-            fontWeight: '900',
-            color: 'deeppink',
-            paddingBottom: '250px',
-            fontFamily: 'none'
-          }}>WELCOME TO COM IP TRACKER!</h1>
-          <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
-            onClick={() => setMapVisible(true)}>
-            IP TRACKER START!
-          </button>
-        </div>
-      
-      )}
       </main>
       <Toaster />
     </>
