@@ -4,9 +4,9 @@ import { MapContainer, Marker, TileLayer, ZoomControl } from "react-leaflet";
 
 export default function Map({ position }) {
   const locationIcon = L.icon({
-    iconUrl: "/images/icon-location.svg",
-    iconSize: [46, 56], // size of the icon
-    iconAnchor: [23, 56], // point of the icon which will correspond to marker's location
+    iconUrl: "/images/icon1.svg",
+    iconSize: [76, 86], // size of the icon
+    iconAnchor: [37, 82], // point of the icon which will correspond to marker's location
     popupAnchor: [0, -56], // point from which the popup should open relative to the iconAnchor
   });
 

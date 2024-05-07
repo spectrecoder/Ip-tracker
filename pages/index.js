@@ -14,7 +14,6 @@ export default function Home({ data }) {
   });
 
   const [detail, setDetail] = useState(false)
-  const [mapVisible, setMapVisible] = useState(false)
   const [info, setInfo] = useState({
     ip: "n/a",
     city: "n/a",
@@ -66,13 +65,6 @@ export default function Home({ data }) {
             height={500}
           />
         </Link>
-        {/* <h1 style={{
-            fontSize: '60px',
-            fontStyle: 'italic',
-            fontWeight: '900',
-            color: 'deeppink',
-            fontFamily: 'none'
-          }}>WELCOME TO COM IP TRACKER!</h1> */}
       </nav>
       <main className="h-screen relative">
         <>
