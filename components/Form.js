@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import addressData from "../address.json";
 import iconArrow from "../public/images/icon-arrow.svg";
 
 export default function Form() {
@@ -9,8 +10,17 @@ export default function Form() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (value) {
-      router.replace(`/?value=${value}`)
+    let foundAddress = null;
+    // Check if the entered value is a model name from address.json
+    const model = addressData.find(item => item.name === value);
+    if (model) {
+      foundAddress = model.address;
+    } else {
+      foundAddress = value; // Use the entered value as is
+    }
+
+    if (foundAddress) {
+      router.replace(`/?value=${foundAddress}`)
     }
   };
 
@@ -18,7 +28,6 @@ export default function Form() {
     setValue(e.target.value);
   };
 
-  // Out of Focus
   const handleBlur = () => {
     setValue(value.replace(/\s/g, ""));
   };
