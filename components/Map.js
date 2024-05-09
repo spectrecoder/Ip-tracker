@@ -20,7 +20,7 @@ export default function Map({ position }) {
     >
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
+        url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png?api_key=c685e0bc-f902-4bfa-82cf-816fd461dcec"
       />
       <Marker position={position} icon={locationIcon}></Marker>
       <ZoomControl position="bottomright" />

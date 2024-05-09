@@ -14,7 +14,9 @@ export default function Form() {
     // Check if the entered value is a model name from address.json
     const model = addressData.find(item => item.name === value);
     if (model) {
-      foundAddress = model.address;
+      // Extract the IP address from the address string
+      const ipAddress = model.address.split(':')[0];
+      foundAddress = ipAddress;
     } else {
       foundAddress = value; // Use the entered value as is
     }
