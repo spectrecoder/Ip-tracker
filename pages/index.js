@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 // Components
+import SelectModule from "@/components/SelectModule";
 import toast, { Toaster } from "react-hot-toast";
 import DetailInfoCard from "../components/DetailInfoCard";
 import Form from "../components/Form";
@@ -81,7 +82,7 @@ export default function Home({ data }) {
               onClick={() => setDetail(!detail)}>{detail == true ? "Main Info" : "Detail Info"}
             </button>
           </div>
-          
+          <SelectModule/>
           <div className="mt-6 md:mt-12">
             { !detail && (
                 <></>
