@@ -4,7 +4,7 @@ import { useState } from "react";
 import addressData from "../address.json";
 import iconArrow from "../public/images/icon-arrow.svg";
 
-export default function Form() {
+export default function Form({setModuleInfo}) {
   const router = useRouter()
   const [value, setValue] = useState("");
 
@@ -12,7 +12,8 @@ export default function Form() {
     e.preventDefault();
     let foundAddress = null;
     // Check if the entered value is a model name from address.json
-    const model = addressData.find(item => item.name === value);
+    const models = addressData.filter(item => item.name.toLowerCase().includes(value.toLowerCase()));
+    const model = models.length > 0 ? models[0] : null;
     if (model) {
       // Extract the IP address from the address string
       const ipAddress = model.address.split(':')[0];

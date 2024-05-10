@@ -25,6 +25,17 @@ export default function Home({ data }) {
     lng: 106.82700139258762,
   });
 
+  const [moduleInfo, setModuleInfo] = useState({
+    name: "n/a",
+    address: "n/a",
+    emission: "n/a",
+    dividends: "n/a",
+    regblock: "n/a",
+    last_update: "n/a",
+    balance: "n/a",
+    stake: "n/a",
+})
+
   useEffect(() => {
     if (data) {
       setInfo({
@@ -75,14 +86,14 @@ export default function Home({ data }) {
             Com IP Address Tracker
           </h1>
           <div className="mt-7 md:mt-8 flex">
-            <Form />
+            <Form setModuleInfo={setModuleInfo} moduleInfo={moduleInfo} />
             <button
               className="mx-10 select-none rounded-lg bg-blue-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
               type="button"
               onClick={() => setDetail(!detail)}>{detail == true ? "Main Info" : "Detail Info"}
             </button>
           </div>
-          <SelectModule/>
+          <SelectModule setModuleInfo={setModuleInfo} moduleInfo={moduleInfo}/>
           <div className="mt-6 md:mt-12">
             { !detail && (
                 <></>

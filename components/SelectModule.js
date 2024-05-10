@@ -3,19 +3,10 @@ import { useState } from "react";
 import DetailModule from "./DetailModule";
 import MoulesData from './info1.json';
 
-export default function SelectModule() {
+export default function SelectModule({setModuleInfo, moduleInfo}) {
     const router = useRouter()
     const [detailVisible, setDetailVisible] = useState(false)
-    const [moduleInfo, setModuleInfo] = useState({
-        name: "n/a",
-        address: "n/a",
-        emission: "n/a",
-        dividends: "n/a",
-        regblock: "n/a",
-        last_update: "n/a",
-        balance: "n/a",
-        stake: "n/a",
-    })
+    
     const handleModuleChange = (module) => {
         let foundAddress = null;
         // Check if the entered value is a model name from address.json
